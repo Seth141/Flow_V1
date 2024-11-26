@@ -1,0 +1,7 @@
+.App {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Keep other existing styles that don't relate to the chat interface */

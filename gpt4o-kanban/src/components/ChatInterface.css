@@ -1,0 +1,381 @@
+.chat-container {
+  position: absolute;
+  top: calc(50% + 35px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 800px;
+  z-index: 10;
+}
+
+.chat-interface {
+  background: linear-gradient(135deg, rgba(155, 151, 151, 0.1), rgba(227, 221, 221, 0));
+  backdrop-filter: blur(70px);
+  -webkit-backdrop-filter: blur(90px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+  padding: 30px;
+}
+
+.chat-log {
+  height: 60vh;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  scroll-behavior: smooth;
+  
+  /* Hide scrollbar by default but maintain functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chat-log::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+  opacity: 0;
+}
+
+/* Show scrollbar only when hovering over chat-log */
+.chat-log:hover::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+
+.chat-log::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.chat-log::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.chat-log::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.chat-interface form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.chat-interface input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  background: rgba(210, 207, 207, 0.9);
+  color: #333;
+  caret-color: #9f7aea;
+  font-family: 'Inter', sans-serif !important;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    inset 0 2px 3px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  transform: translateY(-1px);
+}
+
+.chat-interface input:hover {
+  box-shadow: 
+    0 3px 6px rgba(0, 0, 0, 0.12),
+    0 5px 8px rgba(0, 0, 0, 0.06),
+    inset 0 2px 3px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.chat-interface input:focus {
+  outline: none;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.15),
+    0 6px 12px rgba(0, 0, 0, 0.1),
+    inset 0 2px 3px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.05);
+  border-color: #9f7aea;
+  transform: translateY(-2px);
+}
+
+.icon-button {
+  background: linear-gradient(135deg, rgba(159, 122, 234, 0.3), rgba(159, 122, 234, 0.1));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 5px;  /* Back to rounded rectangle */
+  color: white;
+  height: 40px;
+  min-width: 50px;  /* Minimum width for the button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;  /* Slightly smaller icon size */
+  padding: 0 15px;  /* Horizontal padding */
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.icon-button:hover {
+  background: linear-gradient(135deg, rgba(159, 122, 234, 0.4), rgba(159, 122, 234, 0.2));
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.icon-button:active {
+  transform: translateY(1px);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Remove old button styles */
+.new-chat-button {
+  background: linear-gradient(135deg, rgba(159, 122, 234, 0.3), rgba(159, 122, 234, 0.1));
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  75% {
+    opacity: 0.7;
+    transform: scale(1.01) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.message {
+  position: relative;
+  margin: 10px 0;
+  padding: 15px 20px;
+  border-radius: 10px;
+  max-width: 80%;
+  color: white;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateZ(0);
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.message:hover {
+  transform: scale(1.015);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.message.user {
+  background: linear-gradient(135deg, rgba(159, 122, 234, 0.3), rgba(159, 122, 234, 0.1));
+  margin-left: auto;
+}
+
+.message.bot {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+  margin-right: auto;
+}
+
+.message:hover {
+  transform: perspective(1000px) translateZ(10px);
+}
+
+/* Add custom scrollbar for chat log */
+.chat-log::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-log::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.chat-log::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.chat-log::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Add these styles for purple text selection */
+.chat-interface ::selection {
+  background: rgba(159, 122, 234, 0.4); /* Purple highlight */
+  color: white;
+}
+
+.chat-interface ::-moz-selection {
+  background: rgba(159, 122, 234, 0.4); /* Purple highlight for Firefox */
+  color: white;
+}
+
+.chat-log ::selection {
+  background: rgba(159, 122, 234, 0.4);
+  color: white;
+}
+
+.chat-log ::-moz-selection {
+  background: rgba(159, 122, 234, 0.4);
+  color: white;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.new-chat-button {
+  background: linear-gradient(135deg, rgba(159, 122, 234, 0.3), rgba(159, 122, 234, 0.1));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 5px;
+  color: white;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-weight: 500;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 2px 5px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.new-chat-button:hover {
+  background: linear-gradient(135deg, rgba(159, 122, 234, 0.4), rgba(159, 122, 234, 0.2));
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.new-chat-button:active {
+  transform: translateY(1px);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.thinking-indicator {
+  padding: 15px 20px;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(159, 122, 234, 0.7);
+  border-radius: 50%;
+  position: relative;
+}
+
+.dot:nth-child(1) {
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+  animation: bounce 1.4s ease-in-out -0.32s infinite;
+}
+
+.dot:nth-child(3) {
+  animation: bounce 1.4s ease-in-out -0.16s infinite;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0.5;
+    box-shadow: 0 0 0 rgba(159, 122, 234, 0);
+  }
+  40% {
+    transform: translateY(-8px) scale(1.2);
+    opacity: 1;
+    box-shadow: 0 4px 8px rgba(159, 122, 234, 0.3);
+  }
+}
+
+.thinking-indicator.message {
+  max-width: 80px;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+  backdrop-filter: blur(8px);
+}
+
+/* Container for each dot and its connecting lines */
+.dot-container {
+  position: relative;
+  width: 6px;
+  height: 6px;
+}
+
+/* Connecting lines */
+.dot-container::before,
+.dot-container::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  background: rgba(159, 122, 234, 0.3);
+  top: 50%;
+  transform-origin: left center;
+  animation: lineConnect 1.4s ease-in-out infinite;
+}
+
+/* Line to next dot */
+.dot-container::after {
+  left: 6px;
+  width: 12px;
+}
+
+/* Don't show line after last dot */
+.dot-container:last-child::after {
+  display: none;
+}
+
+/* Don't apply hover effect to the thinking indicator */
+.thinking-indicator:hover {
+  transform: none;
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
