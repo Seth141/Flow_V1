@@ -14,13 +14,14 @@ const LoginPage = () => {
   console.log('Initiating Google login...');
     const { user, session, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: 'http://localhost:3000/chat'
+      }
     });
     if (error) {
       console.log('Google login error:', error.message);
     } else {
       console.log('Google login successful, session:', session);
-      // navigate('/chat');
-      // issue: redirects to /# and not /chat
     }
   };
 
