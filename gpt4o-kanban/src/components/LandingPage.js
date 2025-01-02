@@ -6,7 +6,7 @@ import './CircleAnimation.css';
 import flowLogo from './images/flow-logo.png';
 import Footer from './Footer';
 
-function LandingPage() {
+function LandingPage({ setSession }) {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -83,7 +83,7 @@ function LandingPage() {
           </p>
           <button 
             className="start-button"
-            onClick={() => navigate('/chat')}
+            onClick={() => navigate('/login')}
           >
             Try Flow
           </button>
