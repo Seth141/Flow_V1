@@ -5,6 +5,7 @@ import KanbanBoard from './components/KanbanBoard';
 import LandingPage from './components/LandingPage';
 import { generateTasks, getChatResponse } from './services/gptService';
 import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
 import AnimatedBackground from './components/AnimatedBackground';
 import Header from './components/Header';
 
@@ -81,6 +82,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage setSession={setSession} />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route
           path="/chat"
           element={

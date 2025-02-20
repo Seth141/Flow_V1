@@ -53,9 +53,10 @@ function LandingPage({ setSession }) {
         className={`menu-overlay ${isMenuOpen ? 'open' : ''}`}
       >
         <nav className="menu-content">
-          <a href="#" onClick={(e) => { 
-            e.preventDefault(); // Prevent default navigation
-            toggleMenu(); 
+          <a href="/login" onClick={(e) => {
+            e.preventDefault();
+            toggleMenu();
+            navigate('/login');
           }}>
             Login
           </a>

@@ -1,68 +1,56 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../services/supabaseClient';
+import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../services/supabaseClient'; // Adjust the import path as needed
 import './LoginPage.css';
 
-
-const LoginPage = () => {
-  const navigate = useNavigate();
-
+function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleGoogleLogin = async () => {
-  console.log('Initiating Google login...');
-    const { user, session, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: 'http://localhost:3000/chat'
-      }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError(null);
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
     if (error) {
-      console.log('Google login error:', error.message);
-    } else {
-      console.log('Google login successful, session:', session);
-    }
-  };
-
-  const handleEmailLogin = async () => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      console.error('Error logging in with email:', error.message);
-    } else {
-      navigate('/chat');
-    }
-  };
-
-  const handleSignUp = async () => {
-    const { error } = await supabase.auth.signUp({ email, password });
-    if (error) {
-      console.error('Error signing up:', error.message);
+      setError(error.message);
     } else {
       navigate('/chat');
     }
   };
 
   return (
-    <div className="login-page">
-      <h1>Login to Flow</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleEmailLogin}>Login with Email</button>
-      <button onClick={handleSignUp}>Sign Up</button>
-      <button onClick={handleGoogleLogin}>Login with Google</button>
+    <div className="auth-wrapper">
+      <div className="auth-container">
+        <h2>Log in</h2>
+        <form onSubmit={handleLogin} className="auth-form">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {error && <p className="error">{error}</p>}
+          <button type="submit">Log in</button>
+        </form>
+        <p className="auth-switch">
+          New user? <Link to="/register">Sign up</Link>
+        </p>
+      </div>
     </div>
   );
-};
+}
 
 export default LoginPage;

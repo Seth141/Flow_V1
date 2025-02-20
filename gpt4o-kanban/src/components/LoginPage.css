@@ -1,41 +1,78 @@
-.login-page {
-  font-family: 'Inter', sans-serif;
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Inter", sans-serif !important;
+}
+
+.auth-container {
+  background: rgba(255, 255, 255, 0.09);
+  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); testing differnet shadows around the login panel */
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 2rem;
+  width: 400px;
+}
+
+.auth-container h2 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.auth-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #f5f5f5;
 }
 
-.login-page input[type="email"],
-.login-page input[type="password"] {
-  width: 300px;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.login-page button {
-  background: linear-gradient(135deg, rgba(109, 85, 206, 0.8), rgba(109, 85, 206, 0.6));
+.auth-form input {
+  background: rgba(255, 255, 255, 0.2);
   border: none;
-  border-radius: 8px;
-  color: white;
-  padding: 15px 40px;
-  font-size: 18px;
+  border-radius: 5px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.auth-form input::placeholder {
+  color: #eee;
+}
+
+.auth-form button {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: #fff;
   cursor: pointer;
-  font-weight: 500;
-  margin: 10px 0;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: background 0.3s ease;
 }
 
-.login-page button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(109, 85, 206, 0.3);
+.auth-form button:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
-.login-page button:active {
-  transform: translateY(1px);
+.error {
+  color: #ff8080;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 1rem;
+  color: #fff;
+}
+
+.auth-switch a {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
 }
