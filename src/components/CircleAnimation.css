@@ -1,0 +1,140 @@
+.circle-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(109, 85, 206, 0.6),
+    rgba(109, 85, 206, 0.2)
+  );
+  transform: scale(0) rotate(0deg);
+  opacity: 0;
+  width: 400px;
+  height: 300px;
+  box-shadow:
+    inset 0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 15px rgba(109, 85, 206, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.circle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.4), transparent 60%);
+  opacity: 0.5;
+}
+
+.circle1 {
+  animation: pulseAndRotate1 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-origin: 51% 49%;
+}
+
+.circle2 {
+  animation: pulseAndRotate2 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 2s;
+  transform-origin: 49% 51%;
+}
+
+.circle3 {
+  animation: pulseAndRotate3 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 4s;
+  transform-origin: 52% 48%;
+}
+
+.circle4 {
+  animation: pulseAndRotate1 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 6s;
+  transform-origin: 48% 52%;
+}
+
+.circle5 {
+  animation: pulseAndRotate2 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 8s;
+  transform-origin: 51% 51%;
+}
+
+.circle6 {
+  animation: pulseAndRotate3 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 10s;
+  transform-origin: 49% 49%;
+}
+
+@keyframes pulseAndRotate1 {
+  0% {
+    transform: scale(0) rotate(0deg) translateZ(10px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1) rotate(210deg) translateZ(20px);
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0) rotate(420deg) translateZ(10px);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseAndRotate2 {
+  0% {
+    transform: scale(0) rotate(0deg) translateZ(15px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1) rotate(150deg) translateZ(25px);
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0) rotate(300deg) translateZ(15px);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseAndRotate3 {
+  0% {
+    transform: scale(0) rotate(0deg) translateZ(5px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1) rotate(240deg) translateZ(15px);
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0) rotate(480deg) translateZ(5px);
+    opacity: 0;
+  }
+}
