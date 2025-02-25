@@ -1,0 +1,19 @@
+:root {
+  font-family: 'Inter', sans-serif !important;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: 'Inter', sans-serif !important;
+}
+
+code {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
