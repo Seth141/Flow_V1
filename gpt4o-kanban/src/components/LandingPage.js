@@ -6,7 +6,7 @@ import './CircleAnimation.css';
 import flowLogo from './images/flow-logo.png';
 import Footer from './Footer';
 
-function LandingPage() {
+function LandingPage({ setSession }) {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -53,9 +53,10 @@ function LandingPage() {
         className={`menu-overlay ${isMenuOpen ? 'open' : ''}`}
       >
         <nav className="menu-content">
-          <a href="#" onClick={(e) => { 
-            e.preventDefault(); // Prevent default navigation
-            toggleMenu(); 
+          <a href="/login" onClick={(e) => {
+            e.preventDefault();
+            toggleMenu();
+            navigate('/login');
           }}>
             Login
           </a>
@@ -83,7 +84,7 @@ function LandingPage() {
           </p>
           <button 
             className="start-button"
-            onClick={() => navigate('/chat')}
+            onClick={() => navigate('/login')}
           >
             Try Flow
           </button>

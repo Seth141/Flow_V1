@@ -4,12 +4,42 @@ import ChatInterface from './components/ChatInterface';
 import KanbanBoard from './components/KanbanBoard';
 import LandingPage from './components/LandingPage';
 import { generateTasks, getChatResponse } from './services/gptService';
+import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
 import AnimatedBackground from './components/AnimatedBackground';
 import Header from './components/Header';
+
+import { supabase } from './services/supabaseClient';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const location = useLocation();
+
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      console.log('Session set:', session);
+    });
+
+    console.log('Initial session:', session);
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+  
+  useEffect(() => {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
 
   useEffect(() => {
     const storedTasks = localStorage.getItem('tasks');
@@ -50,8 +80,22 @@ function App() {
       {location.pathname !== '/' && <AnimatedBackground />}
       {location.pathname !== '/' && <Header />}
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/chat" element={<ChatInterface onProjectDescription={handleProjectDescription} onChatMessage={handleChatMessage} />} />
+        <Route path="/" element={<LandingPage setSession={setSession} />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/chat"
+          element={
+            session ? (
+              <ChatInterface
+                onProjectDescription={handleProjectDescription}
+                onChatMessage={handleChatMessage}
+              />
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
         <Route path="/kanban" element={<KanbanBoard tasks={tasks} />} />
       </Routes>
     </div>
@@ -60,6 +104,3 @@ function App() {
 
 //export default here: 
 export default App;
-
-
-
