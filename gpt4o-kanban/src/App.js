@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import ChatInterface from './components/ChatInterface';
 import KanbanBoard from './components/KanbanBoard';
+import LandingPage from './components/LandingPage';
 import { generateTasks, getChatResponse } from './services/gptService';
 import AnimatedBackground from './components/AnimatedBackground';
 import Header from './components/Header';
@@ -46,10 +47,11 @@ function App() {
 
   return (
     <div className="App">
-      <AnimatedBackground />
-      {location.pathname === '/' && <Header />}
+      {location.pathname !== '/' && <AnimatedBackground />}
+      {location.pathname !== '/' && <Header />}
       <Routes>
-        <Route path="/" element={<ChatInterface onProjectDescription={handleProjectDescription} onChatMessage={handleChatMessage} />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/chat" element={<ChatInterface onProjectDescription={handleProjectDescription} onChatMessage={handleChatMessage} />} />
         <Route path="/kanban" element={<KanbanBoard tasks={tasks} />} />
       </Routes>
     </div>
