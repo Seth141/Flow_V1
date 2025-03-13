@@ -562,85 +562,80 @@
   padding: 20px;
 }
 
-.kanban-board {
+/* Scope all kanban-related styles to only apply within the demo visualization */
+.visualization-content .kanban-board {
   display: flex;
-  gap: 25px;
+  justify-content: space-between;
+  gap: 10px;
   width: 100%;
-  height: 100%;
-  padding: 10px;
-}
-
-.kanban-column {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(5px);
-  border-radius: 12px;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 
-    0 5px 15px rgba(0, 0, 0, 0.05),
-    0 8px 0 rgba(109, 85, 206, 0.2);
   height: auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 0;
+  overflow: visible;
 }
 
-.kanban-column:hover {
-  transform: translateY(-5px);
-  box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.1),
-    0 12px 0 rgba(109, 85, 206, 0.3);
+.visualization-content .kanban-column {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  width: 32%;
+  min-width: 0;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  height: auto;
+  max-height: none;
 }
 
-.column-header {
+.visualization-content .column-header {
+  background: rgba(109, 85, 206, 0.1);
+  color: #333;
+  padding: 8px 10px;
+  border-radius: 6px;
   font-weight: 600;
-  padding: 10px 0;
-  margin-bottom: 8px;
-  color: rgba(109, 85, 206, 0.9);
-  font-size: 1.1rem;
-  border-bottom: 2px solid rgba(109, 85, 206, 0.2);
+  margin-bottom: 10px;
   text-align: center;
 }
 
-.task-card {
-  background: linear-gradient(135deg, rgba(109, 85, 206, 0.05), rgba(147, 112, 219, 0.05));
-  padding: 12px 15px;
+.visualization-content .task-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(247, 245, 255, 0.9));
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  box-shadow: 
+    0 4px 10px rgba(109, 85, 206, 0.12),
+    0 1px 3px rgba(109, 85, 206, 0.08);
+  border-left: 3px solid rgba(109, 85, 206, 0.6);
   font-size: 0.9rem;
   color: #333;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(109, 85, 206, 0.1);
-  margin-bottom: 8px;
+  cursor: default;
+  width: auto;
+  height: auto;
+  transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
-.task-card:hover {
-  transform: translateX(5px);
-  background: linear-gradient(135deg, rgba(109, 85, 206, 0.1), rgba(147, 112, 219, 0.1));
-  border-color: rgba(109, 85, 206, 0.2);
+.visualization-content .task-card:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(237, 231, 255, 0.95));
   box-shadow: 
-    0 4px 12px rgba(109, 85, 206, 0.15),
-    0 0 0 1px rgba(109, 85, 206, 0.1);
+    0 6px 12px rgba(109, 85, 206, 0.2),
+    0 2px 4px rgba(109, 85, 206, 0.15);
+  border-left: 3px solid rgba(109, 85, 206, 0.8);
 }
 
-.task-card::after {
+.visualization-content .task-card::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(109, 85, 206, 0.15), transparent);
   transform: translateX(-100%);
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
 
-.task-card:hover::after {
+.visualization-content .task-card:hover::after {
   transform: translateX(100%);
 }
 
