@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+/* look torward theming later */
+:root {
+  --bg-main: rgb(20, 20, 20);
+  --bg-slideout: rgb(221, 224, 231);
+  --bg-sidebar: rgb(231, 233, 238);
+  --text-headline: rgb(77, 79, 103);
+  --text-body: rgb(255, 255, 255);
+  --text-labels: rgb(109, 111, 131);
+  --border: rgb(141, 143, 159);
+  --bg-button: rgb(59, 130, 246);
+  --bg-button-hover: rgb(37, 99, 235);
+  --text-button: rgb(255, 255, 255);
+  --bg-card: rgb(249, 250, 251);
+  --bg-hover: rgb(243, 244, 246);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-body);
+  height: 2000px;
+}

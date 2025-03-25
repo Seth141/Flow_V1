@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/actions/*": ["./src/actions/*"],
+      //"@constants/*": ["./src/constants/*"], paths?
+      "@/utils/*": ["./src/utils/*"],
+      "@/assets/*": ["./src/assets/*"],
+      "@/context/*": ["./src/context/*"]
+    }
+  }
+}
